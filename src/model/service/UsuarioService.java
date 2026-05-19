@@ -22,4 +22,16 @@ public class UsuarioService {
         repository.salvar(usuario);
         return true;
     }
+
+    public void exibirUsuarios() {
+
+        if (repository.listar().isEmpty()) {
+            System.out.println("Nenhum usuário cadastrado.");
+            return;
+        }
+
+        for (Usuario usuario : repository.listar().values()) {
+            usuario.exibirDados();
+        }
+    }
 }
