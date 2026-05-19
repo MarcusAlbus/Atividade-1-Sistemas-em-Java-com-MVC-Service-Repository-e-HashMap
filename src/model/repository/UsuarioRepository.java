@@ -11,6 +11,9 @@ public class UsuarioRepository {
         usuarios.put(usuario.getId(), usuario);
     }
 
+    public void remover(int id) {
+        usuarios.remove(id); }
+
     public Usuario buscarPorId(int id) {
         return usuarios.get(id);
     }
