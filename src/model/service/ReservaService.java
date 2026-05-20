@@ -32,37 +32,56 @@ public class ReservaService {
             String horario
     ) {
 
-        Usuario usuario = repositoryUsuario.buscarPorId(usuarioId);
-        Sala sala = repositorySala.buscarPorId(salaId);
+        try {
 
-        if (usuario == null || sala == null) {
+            Usuario usuario = repositoryUsuario.buscarPorId(usuarioId);
+            Sala sala = repositorySala.buscarPorId(salaId);
+
+            if (usuario == null || sala == null) {
+                return false;
+            }
+
+            if (!sala.isDisponivel()) {
+                return false;
+            }
+
+            Reserva reserva = new Reserva(id, usuario, sala, data, horario);
+
+            sala.setDisponivel(false);
+
+            repositoryReserva.salvar(reserva);
+
+            return true;
+
+        } catch (Exception e) {
+
+            System.out.println("Erro ao criar reserva.");
+
             return false;
         }
-
-        if (!sala.isDisponivel()) {
-            return false;
-        }
-
-        Reserva reserva = new Reserva(id, usuario, sala, data, horario);
-        sala.setDisponivel(false);
-
-        repositoryReserva.salvar(reserva);
-        return true;
-
-     }
+    }
 
     public boolean cancelar(int id) {
 
-        Reserva reserva = repositoryReserva.buscarPorId(id);
+        try {
 
-        if (reserva == null) {
+            Reserva reserva = repositoryReserva.buscarPorId(id);
+
+            if (reserva == null) {
+                return false;
+            }
+
+            reserva.getSala().setDisponivel(true);
+
+            reserva.cancelar();
+
+            return true;
+
+        } catch (Exception e) {
+
+            System.out.println("Erro ao cancelar reserva.");
+
             return false;
+            }
         }
-
-        reserva.getSala().setDisponivel(true);
-
-        reserva.cancelar();
-
-        return true;
     }
-}
