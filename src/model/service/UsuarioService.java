@@ -13,13 +13,24 @@ public class UsuarioService {
 
     public boolean cadastrar(Usuario usuario) {
 
-        for (Usuario u : repository.listar().values()) {
-            if (u.getCpf().equals(usuario.getCpf())) {
-                return false;
-            }
-        }
+        try {
 
-        repository.salvar(usuario);
-        return true;
+            for (Usuario u : repository.listar().values()) {
+
+                if (u.getCpf().equals(usuario.getCpf())) {
+                    return false;
+                }
+            }
+
+            repository.salvar(usuario);
+
+            return true;
+
+        } catch (Exception e) {
+
+            System.out.println("Erro ao cadastrar usuário.");
+
+            return false;
+        }
     }
 }

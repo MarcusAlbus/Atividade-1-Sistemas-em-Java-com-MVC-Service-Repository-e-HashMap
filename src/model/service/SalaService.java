@@ -13,11 +13,21 @@ public class SalaService {
 
     public boolean cadastrar(Sala sala) {
 
-        if (sala.getCapacidade() <= 0) {
+        try {
+
+            if (sala.getCapacidade() <= 0) {
+                return false;
+            }
+
+            repository.salvar(sala);
+
+            return true;
+
+        } catch (Exception e) {
+
+            System.out.println("Erro ao cadastrar sala.");
+
             return false;
         }
-
-        repository.salvar(sala);
-        return true;
     }
 }
