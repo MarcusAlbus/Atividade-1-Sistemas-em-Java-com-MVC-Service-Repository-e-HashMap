@@ -61,6 +61,34 @@ public class ReservaService {
         }
     }
 
+    public boolean atualizar(
+            int id,
+            String novaData,
+            String novoHorario
+    ) {
+
+        try {
+
+            Reserva reserva =
+                    repositoryReserva.buscarPorId(id);
+
+            if (reserva == null) {
+                return false;
+            }
+
+            reserva.setData(novaData);
+            reserva.setHorario(novoHorario);
+
+            return true;
+
+        } catch (Exception e) {
+
+            System.out.println("Erro ao atualizar reserva.");
+
+            return false;
+        }
+    }
+
     public boolean cancelar(int id) {
 
         try {

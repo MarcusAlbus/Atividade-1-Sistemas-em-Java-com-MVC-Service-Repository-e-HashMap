@@ -45,4 +45,12 @@ public class Reserva {
     public void cancelar() {
         this.status = "CANCELADA";
     }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
 }
