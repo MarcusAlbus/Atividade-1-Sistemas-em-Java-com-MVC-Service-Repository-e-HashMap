@@ -2,6 +2,8 @@ package model.entity;
 
 public class Reserva {
 
+    private static int contadorId = 1;
+
     private int id;
     private Usuario usuario;
     private Sala sala;
@@ -9,8 +11,14 @@ public class Reserva {
     private String horario;
     private String status;
 
-    public Reserva(int id, Usuario usuario, Sala sala, String data, String horario) {
-        this.id = id;
+    public Reserva(
+            Usuario usuario,
+            Sala sala,
+            String data,
+            String horario
+    ) {
+
+        this.id = contadorId++;
         this.usuario = usuario;
         this.sala = sala;
         this.data = data;
