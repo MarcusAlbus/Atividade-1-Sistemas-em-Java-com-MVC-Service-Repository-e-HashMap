@@ -1,12 +1,16 @@
 package model.entity;
 
 public class Usuario {
+
+    private static int contadorId = 1;
+
     private int id;
     private String nome;
     private String cpf;
 
-    public Usuario(int id, String nome, String cpf) {
-        this.id = id;
+    public Usuario(String nome, String cpf) {
+
+        this.id = contadorId++;
         this.nome = nome;
         this.cpf = cpf;
     }
