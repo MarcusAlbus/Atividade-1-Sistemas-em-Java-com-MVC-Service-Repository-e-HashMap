@@ -1,21 +1,29 @@
 package main;
 
-import model.controller.SistemaController;
+import controller.ReservaController;
+import controller.SalaController;
+import controller.UsuarioController;
+
 import model.repository.ReservaRepository;
 import model.repository.SalaRepository;
 import model.repository.UsuarioRepository;
+
 import model.service.ReservaService;
 import model.service.SalaService;
 import model.service.UsuarioService;
-import model.view.MenuView;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
-        SalaRepository salaRepository = new SalaRepository();
-        ReservaRepository reservaRepository = new ReservaRepository();
+        UsuarioRepository usuarioRepository =
+                new UsuarioRepository();
+
+        SalaRepository salaRepository =
+                new SalaRepository();
+
+        ReservaRepository reservaRepository =
+                new ReservaRepository();
 
         UsuarioService usuarioService =
                 new UsuarioService(usuarioRepository);
@@ -25,22 +33,24 @@ public class Main {
 
         ReservaService reservaService =
                 new ReservaService(
-                        reservaRepository,
                         usuarioRepository,
-                        salaRepository
+                        salaRepository,
+                        reservaRepository
                 );
 
-        SistemaController controller =
-                new SistemaController(
-                        usuarioService,
-                        salaService,
-                        reservaService
+        UsuarioController usuarioController =
+                new UsuarioController(usuarioService);
+
+        SalaController salaController =
+                new SalaController(salaService);
+
+        ReservaController reservaController =
+                new ReservaController(
+                        reservaService,
+                        reservaRepository
                 );
 
-        MenuView menu = new MenuView(controller);
-
-        menu.iniciar();
+        System.out.println("Sistema iniciado com sucesso.");
 
     }
-
 }
