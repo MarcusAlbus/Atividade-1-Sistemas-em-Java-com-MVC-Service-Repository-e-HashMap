@@ -18,14 +18,16 @@ public class ReservaService {
 
             UsuarioRepository repositoryUsuario,
             SalaRepository repositorySala,
-            ReservaRepository repositoryReserva) {
+            ReservaRepository repositoryReserva
+    ) {
+
         this.repositoryUsuario = repositoryUsuario;
         this.repositorySala = repositorySala;
         this.repositoryReserva = repositoryReserva;
     }
 
     public boolean criar(
-            int id,
+
             int usuarioId,
             int salaId,
             String data,
@@ -34,18 +36,33 @@ public class ReservaService {
 
         try {
 
-            Usuario usuario = repositoryUsuario.buscarPorId(usuarioId);
-            Sala sala = repositorySala.buscarPorId(salaId);
+            Usuario usuario =
+                    repositoryUsuario.buscarPorId(
+                            usuarioId
+                    );
+
+            Sala sala =
+                    repositorySala.buscarPorId(
+                            salaId
+                    );
 
             if (usuario == null || sala == null) {
+
                 return false;
             }
 
             if (!sala.isDisponivel()) {
+
                 return false;
             }
 
-            Reserva reserva = new Reserva(usuario, sala, data, horario);
+            Reserva reserva =
+                    new Reserva(
+                            usuario,
+                            sala,
+                            data,
+                            horario
+                    );
 
             sala.setDisponivel(false);
 
@@ -55,13 +72,16 @@ public class ReservaService {
 
         } catch (Exception e) {
 
-            System.out.println("Erro ao criar reserva.");
+            System.out.println(
+                    "Erro ao criar reserva."
+            );
 
             return false;
         }
     }
 
-    public static boolean atualizar(
+    public boolean atualizar(
+
             int id,
             String novaData,
             String novoHorario
@@ -73,6 +93,7 @@ public class ReservaService {
                     repositoryReserva.buscarPorId(id);
 
             if (reserva == null) {
+
                 return false;
             }
 
@@ -83,23 +104,28 @@ public class ReservaService {
 
         } catch (Exception e) {
 
-            System.out.println("Erro ao atualizar reserva.");
+            System.out.println(
+                    "Erro ao atualizar reserva."
+            );
 
             return false;
         }
     }
 
-    public static boolean cancelar(int id) {
+    public boolean cancelar(int id) {
 
         try {
 
-            Reserva reserva = repositoryReserva.buscarPorId(id);
+            Reserva reserva =
+                    repositoryReserva.buscarPorId(id);
 
             if (reserva == null) {
+
                 return false;
             }
 
-            reserva.getSala().setDisponivel(true);
+            reserva.getSala()
+                    .setDisponivel(true);
 
             reserva.cancelar();
 
@@ -107,9 +133,11 @@ public class ReservaService {
 
         } catch (Exception e) {
 
-            System.out.println("Erro ao cancelar reserva.");
+            System.out.println(
+                    "Erro ao cancelar reserva."
+            );
 
             return false;
-            }
         }
     }
+}

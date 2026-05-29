@@ -1,56 +1,94 @@
 package view;
 
 import controller.SalaController;
-import model.repository.SalaRepository;
 
 import java.util.Scanner;
 
-import static controller.SalaController.cadastrarSala;
-
 public class SalaView {
 
-    public static void gerenciarSala(){
+    private SalaController salaController;
+
+    public SalaView(
+            SalaController salaController
+    ) {
+
+        this.salaController = salaController;
+    }
+
+    public void gerenciarSala(){
+
         Scanner input = new Scanner(System.in);
+
         int opcao = -1;
 
         do{
+
             System.out.println("Menu de Salas");
             System.out.println("1 - Cadastrar sala");
-            System.out.println("2 - Listar sala");
-            System.out.println("0 - Voltar ao menu principal");
+            System.out.println("0 - Voltar");
 
             try {
+
                 opcao = input.nextInt();
 
                 switch (opcao){
 
                     case 1:
-                        cadastrarSalaV();
 
-                    case 2:
-                        SalaRepository.listar();
+                        cadastrarSalaV();
+                        break;
 
                     case 0:
-                        MenuView.menuPrincipal();
+
+                        break;
 
                     default:
-                            System.out.println("Erro! Opção inválida.");
+
+                        System.out.println(
+                                "Erro! Opção inválida."
+                        );
                 }
-            } catch (NumberFormatException e){
-                System.out.println("Erro! Digite apenas os números do menu.");
+
+            } catch (Exception e){
+
+                System.out.println(
+                        "Erro! Digite apenas os números do menu."
+                );
+
+                input.nextLine();
             }
+
         } while (opcao != 0);
     }
 
-    public static void cadastrarSalaV(){
+    public void cadastrarSalaV(){
+
         Scanner input = new Scanner(System.in);
 
         System.out.println("Cadastro da sala");
 
-        System.out.println("Informe o número da sala");
+        System.out.println(
+                "Informe o ID da sala"
+        );
+
+        int id = input.nextInt();
+
+        System.out.println(
+                "Informe o número da sala"
+        );
+
         int numero = input.nextInt();
 
-        System.out.println("Informe a capacidade da sala");
+        System.out.println(
+                "Informe a capacidade da sala"
+        );
+
         int capacidade = input.nextInt();
+
+        salaController.cadastrarSala(
+                id,
+                numero,
+                capacidade
+        );
     }
 }

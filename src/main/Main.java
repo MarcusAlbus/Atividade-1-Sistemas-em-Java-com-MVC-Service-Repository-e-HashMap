@@ -12,6 +12,11 @@ import model.service.ReservaService;
 import model.service.SalaService;
 import model.service.UsuarioService;
 
+import view.MenuView;
+import view.ReservaView;
+import view.SalaView;
+import view.UsuarioView;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -26,10 +31,14 @@ public class Main {
                 new ReservaRepository();
 
         UsuarioService usuarioService =
-                new UsuarioService(usuarioRepository);
+                new UsuarioService(
+                        usuarioRepository
+                );
 
         SalaService salaService =
-                new SalaService(salaRepository);
+                new SalaService(
+                        salaRepository
+                );
 
         ReservaService reservaService =
                 new ReservaService(
@@ -39,10 +48,14 @@ public class Main {
                 );
 
         UsuarioController usuarioController =
-                new UsuarioController(usuarioService);
+                new UsuarioController(
+                        usuarioService
+                );
 
         SalaController salaController =
-                new SalaController(salaService);
+                new SalaController(
+                        salaService
+                );
 
         ReservaController reservaController =
                 new ReservaController(
@@ -50,7 +63,28 @@ public class Main {
                         reservaRepository
                 );
 
-        System.out.println("Sistema iniciado com sucesso.");
+        UsuarioView usuarioView =
+                new UsuarioView(
+                        usuarioController
+                );
 
+        SalaView salaView =
+                new SalaView(
+                        salaController
+                );
+
+        ReservaView reservaView =
+                new ReservaView(
+                        reservaController
+                );
+
+        MenuView menuView =
+                new MenuView(
+                        usuarioView,
+                        reservaView,
+                        salaView
+                );
+
+        menuView.menuPrincipal();
     }
 }
