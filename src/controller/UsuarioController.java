@@ -9,8 +9,8 @@ public class UsuarioController {
     public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
-    public void cadastrarUsuario(int id, String nome, String cpf) {
-        Usuario novoUsuario = new Usuario(id, nome, cpf);
+    public void cadastrarUsuario(String nome, String cpf) {
+        Usuario novoUsuario = new Usuario(nome, cpf);
         boolean sucesso = usuarioService.cadastrar(novoUsuario);
         if (sucesso) {
             System.out.println("Usuário cadastrado com sucesso!");

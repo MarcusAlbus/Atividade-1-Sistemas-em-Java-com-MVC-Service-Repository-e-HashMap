@@ -45,7 +45,7 @@ public class ReservaService {
                 return false;
             }
 
-            Reserva reserva = new Reserva(id, usuario, sala, data, horario);
+            Reserva reserva = new Reserva(usuario, sala, data, horario);
 
             sala.setDisponivel(false);
 

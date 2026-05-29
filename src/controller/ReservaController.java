@@ -15,7 +15,14 @@ public class ReservaController {
     }
 
 public void criarReserva(int id, int usuarioId, int salaId, String data, String horario){
-    boolean sucesso = reservaService.criar(id, usuarioId, data, horario);
+
+    boolean sucesso = reservaService.criar(
+            id,
+            usuarioId,
+            salaId,
+            data,
+            horario
+    );
 
     if (sucesso){
         System.out.println("Reserva realizada com sucesso!");
