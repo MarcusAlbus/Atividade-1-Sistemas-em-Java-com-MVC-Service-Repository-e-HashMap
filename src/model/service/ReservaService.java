@@ -61,7 +61,7 @@ public class ReservaService {
         }
     }
 
-    public boolean atualizar(
+    public static boolean atualizar(
             int id,
             String novaData,
             String novoHorario
@@ -89,7 +89,7 @@ public class ReservaService {
         }
     }
 
-    public boolean cancelar(int id) {
+    public static boolean cancelar(int id) {
 
         try {
 

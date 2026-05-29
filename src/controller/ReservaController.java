@@ -6,8 +6,8 @@ import model.service.ReservaService;
 
 public class ReservaController {
 
-    private ReservaService reservaService;
-    private ReservaRepository reservaRepository;
+    private static ReservaService reservaService;
+    private static ReservaRepository reservaRepository;
 
     public ReservaController(ReservaService reservaService, ReservaRepository reservaRepository) {
         this.reservaService = reservaService;
@@ -23,7 +23,7 @@ public void criarReserva(int id, int usuarioId, int salaId, String data, String 
         System.out.println("Erro ao criar reserva.");
     }
 }
-public void listarReservas(){
+public static void listarReservas(){
 
     if(reservaRepository.listar().isEmpty()){
         System.out.println("Nenhuma reservada cadastrada.");
@@ -41,7 +41,7 @@ public void listarReservas(){
     }
 }
 
-public void atualizarReseva(int id, String novaData, String novoHorario){
+public static void atualizarReseva(int id, String novaData, String novoHorario){
         boolean sucesso =reservaService.atualizar(id, novaData, novoHorario);
         if(sucesso){
             System.out.println("Reserva atualizada com sucesso!");
@@ -50,7 +50,7 @@ public void atualizarReseva(int id, String novaData, String novoHorario){
         }
 }
 
-public void cancelarReserva(int id){
+public static void cancelarReserva(int id){
         boolean sucesso = reservaService.cancelar(id);
         if(sucesso){
             System.out.println("Reserva cancelada com sucesso e sala liberada!");
