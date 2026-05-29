@@ -9,18 +9,15 @@ public class UsuarioView {
 
     UsuarioController controller;
 
-    public UsuarioView(
-            UsuarioController controller
-    ) {
+    public UsuarioView(UsuarioController controller){
 
         this.controller = controller;
     }
 
-    public void cadastrarUsuario() {
+    public static void gerenciarUsuario() {
+    }
 
-        System.out.println("Informe o ID:");
-        int id = input.nextInt();
-        input.nextLine();
+    public void cadastrarUsuario(){
 
         System.out.println("Informe seu nome:");
         String nome = input.nextLine();
@@ -30,4 +27,5 @@ public class UsuarioView {
 
         controller.cadastrarUsuario(nome, cpf);
     }
+
 }

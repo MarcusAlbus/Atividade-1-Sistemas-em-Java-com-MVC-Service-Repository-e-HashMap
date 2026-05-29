@@ -1,17 +1,22 @@
 package view;
 
 import controller.ReservaController;
+import model.entity.Reserva;
+import model.entity.Usuario;
+import model.repository.ReservaRepository;
 import model.service.ReservaService;
 import java.util.Scanner;
 
 public class ReservaView {
     private ReservaController reservaController;
+    private ReservaRepository reservaRepository;
 
-    public ReservaView() {
+    public ReservaView(ReservaController reservaController, ReservaRepository reservaRepository) {
         this.reservaController = reservaController;
+        this.reservaRepository = reservaRepository;
     }
 
-    public void gerenciarReserva() {
+    public static void gerenciarReserva() {
         Scanner input = new Scanner(System.in);
         int opcao = -1;
 
@@ -54,7 +59,7 @@ public class ReservaView {
     }
 
 
-    public void criarReserva() {
+    public static void criarReserva() {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Criar Reserva");
@@ -69,9 +74,11 @@ public class ReservaView {
 
         System.out.println("Digite o horário (HH:MM): ");
         String horario = input.nextLine();
+
+        Usuario usuario = new Usuario();
     }
 
-    public void atualizarReserva() {
+    public static void atualizarReserva() {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Atualizar Reserva");
@@ -87,7 +94,7 @@ public class ReservaView {
         ReservaController.atualizarReseva(id, novaData, novoHorario);
     }
 
-    public void cancelarReserva() {
+    public static void cancelarReserva() {
 
         Scanner input = new Scanner(System.in);
 
